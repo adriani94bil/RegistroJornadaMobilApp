@@ -26,8 +26,18 @@ public class MainActivity extends AppCompatActivity {
         textViewRespuesta=findViewById(R.id.textView2);
         buttonIniciar=findViewById(R.id.button);
         buttonFinalizar=findViewById(R.id.button2);
-        buttonIniciar.setOnClickListener(v-> ClienteHTTPJornadasWS.iniciarJornada(textViewRespuesta,1,MainActivity.this));
-        buttonFinalizar.setOnClickListener(v-> ClienteHTTPJornadasWS.finalizarJornada(textViewRespuesta,1,MainActivity.this));
+        buttonFinalizar.setEnabled(false);
+        buttonIniciar.setOnClickListener(
+                v-> {
+                    ClienteHTTPJornadasWS.iniciarJornada(textViewRespuesta,1,MainActivity.this);
+                    buttonFinalizar.setEnabled(true);
+                    buttonIniciar.setEnabled(false);
+                });
+        buttonFinalizar.setOnClickListener(v-> {
+            ClienteHTTPJornadasWS.finalizarJornada(textViewRespuesta,1,MainActivity.this);
+            buttonIniciar.setEnabled(true);
+            buttonFinalizar.setEnabled(false);
+        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
