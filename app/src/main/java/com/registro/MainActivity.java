@@ -8,13 +8,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.registro.http.ClienteHTTPJornadasWS;
 
 public class MainActivity extends AppCompatActivity {
+    private TextView textViewRespuesta;
+    private Button buttonIniciar;
+    private Button buttonFinalizar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        textViewRespuesta=findViewById(R.id.textView2);
+        buttonIniciar=findViewById(R.id.button);
+        buttonFinalizar=findViewById(R.id.button2);
+        buttonIniciar.setOnClickListener(v-> ClienteHTTPJornadasWS.iniciarJornada(textViewRespuesta,1,MainActivity.this));
+        buttonFinalizar.setOnClickListener(v-> ClienteHTTPJornadasWS.finalizarJornada(textViewRespuesta,1,MainActivity.this));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
